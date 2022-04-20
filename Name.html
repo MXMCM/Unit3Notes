@@ -17,30 +17,23 @@
             <input type="text" id="last" name="last_name" placeholder="Doe">
         </div>
         <button name="Hello">Say Hello</button>
-        <p class="hidden"></p>
+        <div id="Id"></div>
     </div>
 </div>
 <script>
     const firstName = document.getElementById('first');
     const lastName = document.getElementById('last');
-    const full = document.querySelector('p');
+    const TextId = document.getElementById('Id');
     const submitButton = document.querySelector('[name="Hello"]');
 
-    submitButton.addEventListener('click',function (e){
-        content.insertAdjacentElement('beforebegin',nameCreator());
-    })
-
-    function nameCreator(){
+    submitButton.addEventListener('click',function (){
+        const message = document.createElement('p');
         let first = firstName.value;
         let last = lastName.value;
         let fullName = `Hello ${first} ${last}!`;
-        if(fullName.length>1){
-            full.classList.remove("hidden")
-        } else{
-            full.classList.add("hidden")
-        }
-        full.textContent = fullName;
-    }
+        message.textContent = fullName;
+            TextId.insertAdjacentElement('afterbegin',message)
+    })
 </script>
 </body>
 </html>

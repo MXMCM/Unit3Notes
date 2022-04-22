@@ -12,22 +12,27 @@
             <label for="item">Item</label>
             <input type="text" id="item" name="item">
         </div>
-        <button name="submit">Add</button>
-        <ul id="Id"></ul>
+        <button id="submit">Add</button>
+        <ul class="itemList"></ul>
     </div>
 </div>
 <script>
     const items = document.getElementById('item');
-    const TextId = document.getElementById('Id');
-    const submitButton = document.querySelector('[name="submit"]');
+    const submit = document.getElementById('submit');
+    const List = document.querySelector('ul');
 
-    submitButton.addEventListener('click',function (){
-        let list = document.createElement('li');
-        let item = items.value;
-        let groceries = `${item}`;
-        list.textContent = groceries;
-        TextId.insertAdjacentElement('afterbegin',list)
-    })
+    function addItem(){
+        let itemName = items.value;
+        //
+        let newItem = document.createElement('li');
+        newItem.innerHTML = `${itemName}`
+        newItem.addEventListener('click', function(){
+            newItem.remove();
+        })
+        List.appendChild(newItem);
+        items.value = "";
+    }
+    submit.addEventListener('click', addItem);
 </script>
 </body>
 </html>

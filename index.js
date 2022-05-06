@@ -2,14 +2,14 @@ const cardList = document.querySelector('.cardList');
 const amount = document.getElementById('score');
 const upgrade = document.getElementById('upgrade')
 const auto = document.getElementById('auto');
-const farmer = document.getElementById('farmer');
+const endgame = document.getElementById('end');
 let multi=1;
-let plier=50;
+let plier=100;
 buildBoard();
 
 let interval = setInterval(function (){
     addCard(cardList.children.length +1)
-}, 2000000);
+}, 2000);
 cardList.addEventListener('click', function(e){
     console.log(e.target);
     if(e.target.matches('.cardList')){
@@ -17,11 +17,14 @@ cardList.addEventListener('click', function(e){
     }
     if (e.target.classList.contains('active')){
         e.target.classList.remove('active');
+        let total=+amount.textContent+multi;
+        console.log(total);
+        amount.innerHTML= total;
         e.target.classList.add('inactive');
         return
     }
     e.target.remove();
-    let total=+amount.textContent+multi;
+    total=+amount.textContent+multi;
     console.log(total);
     amount.innerHTML= total;
 })
@@ -39,26 +42,23 @@ function buildBoard(){
 
 }
 upgrade.addEventListener('click',function (){
-    if(amount.textContent >10){
-    multi+=1
-    amount.textContent-=10;
+    if(amount.textContent >20){
+    multi+=.5
+    amount.textContent-=20;
     }
 
 })
 auto.addEventListener('click', function (){
-    if(amount.textContent >50){
+    if(amount.textContent >plier){
         setInterval(function (){
             addCard(cardList.children.length +1)
-        }, 1000);
+        }, 1500);
+        amount.textContent-=plier;
     }
 })
-farmer.addEventListener('click',function (){
-    if(amount.textContent >50) {
-        setInterval(clock, 1000)
+endgame.addEventListener('click', function(){
+    if(amount.textContent>1000){
+        window.alert(`YOU WIN !!!!!`)
+        window.close();
     }
-    })
-function clock(){
-
-}
-
-
+})
